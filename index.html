@@ -14,18 +14,18 @@
     }
     .ytp-title, .ytp-chrome-top-buttons, .ytp-watermark, .ytp-large-play-button{
         display: none;
-    }
-    #mensaje{
-        width: 300px;
-        height: 95px;
+    }   
+    #mensaje {
+        width: 100%;
+        height: 100%;
         background: rgba(0,0,0,0.6);
         position: fixed;
-        top: 400px;
-        left: 50%;
-        margin-left: -150px;
+        top: 0;
+        left: 0;
         border-radius: 5%;
         text-align: center;
-    }
+        line-height: 62;
+    }    
     .hidden{
         display: none;
     }
@@ -38,9 +38,9 @@
 <body>
 
     <div id="mensaje" class="hidden">
-        <img src="img/Actions-go-previous-icon.png" alt="">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
-        <img src="img/Actions-go-next-icon.png" alt="">
+        <img src="img/Actions-go-previous-icon.png" onclick="izquierda();" alt="">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        <img src="img/Actions-go-next-icon.png" onclick="derecha();" alt="">
     </div>
     <div id="player"></div>
     
@@ -49,6 +49,8 @@
         const videos = [{v:"IuZWszHATjI",d:false},{v:"ESkM5cijr9M",d:false},{v:"iS78b5S3BMM",d:true},{v:"2cYyVdslpEw",d:false},{v:"YQ7IhAm8s9M",d:false},{v:"QQyXh6SM_sU",d:true},{v:"eUJYq9SzLJ8",d:false},{v:"rvTJyPWAnHw",d:false},{v:"Lj_lYg9dHes",d:true},{v:"8IFJS_nTulg",d:false},{v:"fUfDBsZTK1g",d:false}];
         let indice = 0;
         let decision = false;
+        let interval_id;
+
         // 2. This code loads the IFrame Player API code asynchronously.
         var tag = document.createElement('script');
 
@@ -77,39 +79,79 @@
             event.target.playVideo();
         }
 
-        function getIndex()
+        function izquierda()
+        {
+            cargarSiguenteVideo(1);
+            ocultarMensaje();
+        }
+
+        function derecha(){
+            cargarSiguenteVideo(2);
+            ocultarMensaje();
+        }
+
+        function siguienteIndice(valor)
         {
             if(indice+1 < videos.length)
             {
-                indice++;
+                indice+=valor;
             }
             return indice;
         }
 
-        function cargarSiguenteVideo(){
-            let obj = videos[getIndex()];
+        function cargarSiguenteVideo(indice){
+            let obj = videos[siguienteIndice(indice)];
             decision = obj.d; console.log("decision "+decision);
             player.loadVideoById(obj.v, 0, "default");
         }
         
         function onPlayerStateChange(event) {
             if (event.data == YT.PlayerState.PLAYING) {
+                empezarChequeo();
             }
             if(event.data == YT.PlayerState.ENDED){
-                cargarSiguenteVideo();
+                cargarSiguenteVideo(1);
             }
-            if(decision && (player.getDuration()-player.getCurrentTime())==1)
+            
+        }
+
+        function empezarChequeo()
+        {
+            detenerChequeo();
+            interal_id = setInterval(() => {
+                esperarAntesDelFinal(2);                
+            }, 1000);
+        }
+
+        function detenerChequeo(){
+            if(interval_id)
+            {
+                clearInterval(interval_id);
+            }
+        }
+
+        function esperarAntesDelFinal(tiempo)
+        {
+            if(decision && ((player.getDuration()-player.getCurrentTime())<=tiempo))
             {
                 mostrarMensaje();
             }
-            console.log("tiempo total "+player.getDuration()+" tiempo actual "+player.getCurrentTime())
+            console.log(decision+" tiempo total "+player.getDuration()+" tiempo actual "+player.getCurrentTime()+" diferencia "+(player.getDuration()-player.getCurrentTime()))
         }
+
+        function ocultarMensaje()
+        {
+            mensaje.className = "hidden";
+        }
+
         function mostrarMensaje()
         {
             mensaje.className = "show";
+            detenerVideo();
+            detenerChequeo();
         }
-        function stopVideo() {
-            //player.stopVideo();
+        function detenerVideo() {
+            player.stopVideo();
         }
 
 
