@@ -134,14 +134,14 @@
                     mostrarMensaje({
                         estado:"CONDICIONAL",
                         controles:controles_config,
-                        imagen:"img/"+video_actual.id+".jpg"
+                        imagen:"img/"+video_actual.c+".jpg"
                     });
                 }
                 else
                 {
                     mostrarMensaje({
                         estado:"FIN_VIDEO",
-                        imagen:"img/"+video_actual.id+".jpg"
+                        imagen:"img/"+video_actual.c+".jpg"
                     });
                 }
             }
@@ -157,7 +157,7 @@
             mensaje.className = "show";
             detenerVideo();
             mensaje.innerHTML = "";
-            console.log(obj.estado);
+            console.dir(obj);
 
             if(obj.estado == "CONDICIONAL")
             {
@@ -167,13 +167,22 @@
 
             if(obj.estado == "FIN_VIDEO")
             {
+                cargarPlay(video_actual.s);
                 cargarImagen(obj.imagen);
             }
         }
 
-        function cargarImagen(obj)
+        function cargarPlay(siguiente)
         {
-            mensaje.innerHTML += "<img src='"+obj.imagen+"' />";
+            let play = '<img src="img/Actions-go-next-view-icon" class="control" onclick="cargarVideo('+siguiente+');" alt="">';
+            mensaje.innerHTML += play;
+        }
+        function cargarImagen(imagen)
+        {
+            
+            //mensaje.innerHTML += "<img style='max-width:100%;' src='"+imagen+"' />";
+            mensaje.style.backgroundImage = 'url("'+imagen+'")';
+            mensaje.style.backgroundSize = "cover";
         }
 
         function cargarControles(controles)
@@ -184,7 +193,7 @@
             let ia = '<img src="img/Actions-go-up-icon.png" class="control" onclick="arriba();" alt="">';
             let temp = controles.split(",");
             let salida = "";
-            console.log(temp);
+            
             for(let cont = 0; cont<temp.length;cont++)
             {
                 if(temp[cont]=="i")
