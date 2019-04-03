@@ -3,69 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-
-    <style type="text/css">
-    body,html{
-        margin: 0px;
-        padding: 0px;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-    }
-    .ytp-title, .ytp-chrome-top-buttons, .ytp-watermark, .ytp-large-play-button{
-        display: none;
-    }   
-    #mensaje {
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.6);
-        position: fixed;
-        top: 0;
-        left: 0;
-        text-align: center;
-        line-height: 62;
-    }    
-    .hidden{
-        display: none;
-    }
-    .show{
-        display:block !important;
-    }
-    .control{
-        cursor: pointer;
-    }
-    .btn_circulo{
-        border-radius: 50%;
-        padding: 7px;
-        font-family: sans-serif;
-        background: black;
-        color:white;
-        display: inline;
-        cursor: pointer;
-    }
-    .btn_circulo:hover{
-        background:white;
-        color:black;
-    }
-    .menu_secciones{
-        position: fixed;
-        bottom:20px;
-        left: 50%;
-        margin-left: -200px;
-        width:400px;
-        text-align: center;
-    }
-    </style>
+    <link rel="stylesheet" href="css/main.css">
 
 </head>
 <body>
 
     <div id="mensaje" class="hidden">
-        <img src="img/Actions-go-previous-icon.png" class="control" onclick="izquierda();" alt="">
-        &nbsp;&nbsp;&nbsp;
-        <img src="img/Eye-icon.png" class="control" onclick="centro();" alt="">
-        &nbsp;&nbsp;&nbsp; 
-        <img src="img/Actions-go-next-icon.png" class="control" onclick="derecha();" alt="">
     </div>
     <nav class="menu_secciones">
         <div class="btn_circulo" onclick="cargarVideo(1);">1</div>
@@ -160,16 +103,10 @@
         
         function onPlayerStateChange(event) {
             if (event.data == YT.PlayerState.PLAYING) {
-                if(!fin_escena)
-                {
-                    empezarChequeo();                
-                }
-                else{
-                    detenerChequeo();
-                }
+                
             }
             if(event.data == YT.PlayerState.ENDED){
-                if(!Array.isArray(video_actual.s))
+                /*if(!Array.isArray(video_actual.s))
                 {
                     cargarVideo(video_actual.s);
                 }
@@ -179,33 +116,35 @@
                     //Cuando el usuario navega por las opciones se repite el video anterior,
                     //Pendiente la logica para volver a la imagen.
                     detenerVideo();
+                }*/
+                if(Array.isArray(video_actual.s))
+                {
+                    let controles_config = "";
+                    //cargarVideo(video_actual.s);
+                    if(video_actual.id == 4)
+                    {
+                        controles_config = "i,v,d";
+                    }
+
+                    if(video_actual.id == 7)
+                    {
+                        controles_config = "i,d,a";
+                    }
+
+                    mostrarMensaje({
+                        estado:"CONDICIONAL",
+                        controles:controles_config,
+                        imagen:"img/"+video_actual.id+".jpg"
+                    });
+                }
+                else
+                {
+                    mostrarMensaje({
+                        estado:"FIN_VIDEO",
+                        imagen:"img/"+video_actual.id+".jpg"
+                    });
                 }
             }
-        }
-
-        function empezarChequeo()
-        {
-            detenerChequeo();
-            interal_id = setInterval(() => {
-                esperarAntesDelFinal(2);                
-            }, 5000);
-        }
-
-        function detenerChequeo(){
-            if(interval_id)
-            {
-                clearInterval(interval_id);
-            }
-        }
-
-        function esperarAntesDelFinal(tiempo)
-        {
-            if(video_actual.d && ((player.getDuration()-player.getCurrentTime())<=tiempo))
-            {
-                mostrarMensaje();
-                fin_escena = true;
-            }
-            console.log(video_actual.d+" tiempo total "+player.getDuration()+" tiempo actual "+player.getCurrentTime()+" diferencia "+(player.getDuration()-player.getCurrentTime()))
         }
 
         function ocultarMensaje()
@@ -213,12 +152,64 @@
             mensaje.className = "hidden";
         }
 
-        function mostrarMensaje()
+        function mostrarMensaje(obj)
         {
             mensaje.className = "show";
             detenerVideo();
-            detenerChequeo();
+            mensaje.innerHTML = "";
+            console.log(obj.estado);
+
+            if(obj.estado == "CONDICIONAL")
+            {
+                cargarControles(obj.controles);
+                cargarImagen(obj.imagen);
+            }
+
+            if(obj.estado == "FIN_VIDEO")
+            {
+                cargarImagen(obj.imagen);
+            }
         }
+
+        function cargarImagen(obj)
+        {
+            mensaje.innerHTML += "<img src='"+obj.imagen+"' />";
+        }
+
+        function cargarControles(controles)
+        {
+            let ii = '<img src="img/Actions-go-previous-icon.png" class="control" onclick="izquierda();" alt="">';
+            let iv = '<img src="img/Eye-icon.png" class="control" onclick="centro();" alt="">';   
+            let id = '<img src="img/Actions-go-next-icon.png" class="control" onclick="derecha();" alt="">';
+            let ia = '<img src="img/Actions-go-up-icon.png" class="control" onclick="arriba();" alt="">';
+            let temp = controles.split(",");
+            let salida = "";
+            console.log(temp);
+            for(let cont = 0; cont<temp.length;cont++)
+            {
+                if(temp[cont]=="i")
+                {
+                    salida+= ii;
+                }
+
+                if(temp[cont]=="d")
+                {
+                    salida+= id;
+                }
+
+                if(temp[cont]=="v")
+                {
+                    salida+= iv;
+                }
+                if(temp[cont]=="a")
+                {
+                    salida+= ia;
+                } 
+            }
+            
+            mensaje.innerHTML += salida;
+        }
+
         function detenerVideo() {
             player.stopVideo();
         }
