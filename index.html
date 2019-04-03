@@ -82,7 +82,7 @@
     <script>        
         
         let indice = 1;
-        let decision = false;
+        let fin_escena = false;
         let interval_id;
         let video_actual;
 
@@ -129,8 +129,7 @@
             event.target.playVideo();
         }
 
-        function izquierda()
-        {
+        function izquierda(){
             cargarVideo(video_actual.s[0]);
             ocultarMensaje();
         }
@@ -149,6 +148,7 @@
         function cargarVideo(indice){
             if(indice>0){
                 ocultarMensaje();
+                fin_escena = false;
                 video_actual = videos[indice];            
                 player.loadVideoById(video_actual.v, 0, "default");
             }
@@ -160,10 +160,26 @@
         
         function onPlayerStateChange(event) {
             if (event.data == YT.PlayerState.PLAYING) {
-                empezarChequeo();                
+                if(!fin_escena)
+                {
+                    empezarChequeo();                
+                }
+                else{
+                    detenerChequeo();
+                }
             }
             if(event.data == YT.PlayerState.ENDED){
-                cargarVideo(video_actual.s);
+                if(!Array.isArray(video_actual.s))
+                {
+                    cargarVideo(video_actual.s);
+                }
+                else
+                {
+                    //Aca se debe cargar la imagen de fondo
+                    //Cuando el usuario navega por las opciones se repite el video anterior,
+                    //Pendiente la logica para volver a la imagen.
+                    detenerVideo();
+                }
             }
         }
 
@@ -187,6 +203,7 @@
             if(video_actual.d && ((player.getDuration()-player.getCurrentTime())<=tiempo))
             {
                 mostrarMensaje();
+                fin_escena = true;
             }
             console.log(video_actual.d+" tiempo total "+player.getDuration()+" tiempo actual "+player.getCurrentTime()+" diferencia "+(player.getDuration()-player.getCurrentTime()))
         }
@@ -205,7 +222,10 @@
         function detenerVideo() {
             player.stopVideo();
         }
-
+        function pausarVideo()
+        {
+            player.pauseVideo();
+        }
 
     </script>
 </body>
