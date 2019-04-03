@@ -73,6 +73,9 @@
         <div class="btn_circulo" onclick="cargarVideo(3);">3</div>
         <div class="btn_circulo" onclick="cargarVideo(4);">4</div>
         <div class="btn_circulo" onclick="cargarVideo(7);">7</div>
+        <div class="btn_circulo" onclick="cargarVideo(10);">10</div>
+        <div class="btn_circulo" onclick="cargarVideo(11);">11</div>
+        <div class="btn_circulo" onclick="cargarVideo(12);">12</div>
     </nav>
     <div id="player"></div>
     
@@ -157,7 +160,7 @@
         
         function onPlayerStateChange(event) {
             if (event.data == YT.PlayerState.PLAYING) {
-                empezarChequeo();
+                empezarChequeo();                
             }
             if(event.data == YT.PlayerState.ENDED){
                 cargarVideo(video_actual.s);
@@ -169,7 +172,7 @@
             detenerChequeo();
             interal_id = setInterval(() => {
                 esperarAntesDelFinal(2);                
-            }, 1000);
+            }, 5000);
         }
 
         function detenerChequeo(){
@@ -185,7 +188,7 @@
             {
                 mostrarMensaje();
             }
-            //console.log(decision+" tiempo total "+player.getDuration()+" tiempo actual "+player.getCurrentTime()+" diferencia "+(player.getDuration()-player.getCurrentTime()))
+            console.log(video_actual.d+" tiempo total "+player.getDuration()+" tiempo actual "+player.getCurrentTime()+" diferencia "+(player.getDuration()-player.getCurrentTime()))
         }
 
         function ocultarMensaje()
