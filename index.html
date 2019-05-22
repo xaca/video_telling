@@ -86,6 +86,8 @@
         let interval_id;
         let video_actual;
 
+        let sound;
+
         const videos = [];
         videos[1] =  {c:"g1", id:1,v:"IuZWszHATjI",d:false,s:2};
         videos[2] =  {c:"g2", id:2,v:"ESkM5cijr9M",d:false,s:3};
@@ -121,11 +123,19 @@
                 'onReady': onPlayerReady,
                 'onStateChange': onPlayerStateChange
                 }
+            });           
+        }
+
+        window.onload = function()
+        {
+            sound = new Howl({
+                src: ['sounds/JuneBug.mp3'],
+                autoplay: false
             });
         }
 
         // 4. The API will call this function when the video player is ready.
-        function onPlayerReady(event) {
+        function onPlayerReady(event) {            
             event.target.playVideo();
         }
 
@@ -228,5 +238,6 @@
         }
 
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.core.min.js"></script>
 </body>
 </html>
