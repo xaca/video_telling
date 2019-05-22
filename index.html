@@ -116,9 +116,14 @@
         
         function onPlayerStateChange(event) {
             if (event.data == YT.PlayerState.PLAYING) {
-                
+                sound.play();
+            }
+            if(event.data == YT.PlayerState.PAUSED)
+            {
+                sound.pause();
             }
             if(event.data == YT.PlayerState.ENDED){
+                sound.pause();
                 /*if(!Array.isArray(video_actual.s))
                 {
                     cargarVideo(video_actual.s);
@@ -235,7 +240,7 @@
         }
 
         function detenerVideo() {
-            player.stopVideo();
+            player.stopVideo();            
         }
         function pausarVideo()
         {
