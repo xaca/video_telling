@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/main.css">
     <style type="text/css">
     .contenedor{
-       /*  background: url("img/fondo_interfaz_01.jpg"); */
+        /* background: url("img/fondo_interfaz_01.jpg"); */
         width: 100%;
         height: 100%;
         background-size: 100%;
@@ -82,12 +82,8 @@
         top: 38px;
         left: 217px;
     }
-    .menu_avance{
-        background-image: url("img/fondo_controles.png");
-        background-repeat: no-repeat;
-        background-position-x: right;
-        background-position-y: center;
-        background-color: #5BA1BD;
+    .menu_avance{        
+        background-color: rgba(91,161,189,.5);
         right: 0;
         top:50%;
         margin-top:-155px;
@@ -110,15 +106,15 @@
         line-height: 24px;
     }
     .btn1{
-        top: 7px;
+        top: 6px;
         left: 47px; 
     }
     .btn2{
-        top: 30px;
+        top: 31px;
         left: 26px; 
     }
     .btn3{
-        top: 53px;
+        top: 54px;
         left: 47px; 
     }
     .btn4{
@@ -126,11 +122,11 @@
         left: 26px; 
     }
     .btn5{
-        top: 100px;
+        top: 101px;
         left: 49px;
     }
     .btn6{
-        top: 124px;
+        top: 126px;
         left: 27px; 
     }
     .btn7{
@@ -142,7 +138,7 @@
         left: 29px; 
     }
     .btn9{
-        top: 194px;
+        top: 196px;
         left: 51px; 
     }
     .btn10{
@@ -154,12 +150,77 @@
         left: 52px;  
     }
     .btn12{
-        top: 266px;
+        top: 267px;
         left: 31px; 
     }
     .seleccionado{
         background:#F5CD21;
     }
+
+
+    .sprite {
+        background-image: url("img/progreso_sprite_sheet.png");
+        background-repeat: no-repeat;
+        width: 115px;
+        height: 406px;
+        transform: scale(.7);
+        margin-top: -45px;
+        z-index: -1;
+    }
+
+    .progreso_0 {
+        background-position: -5px -5px;
+    }
+
+    .progreso_1 {
+        background-position: -130px -5px;
+    }
+
+    .progreso_2 {
+        background-position: -255px -5px;
+    }
+
+    .progreso_3 {
+        background-position: -380px -5px;
+    }
+
+    .progreso_4 {
+        background-position: -505px -5px;
+    }
+
+    .progreso_5 {
+        background-position: -630px -5px;
+    }
+
+    .progreso_6 {
+        background-position: -755px -5px;
+    }
+
+    .progreso_7 {
+        background-position: -5px -415px;
+    }
+
+    .progreso_8 {
+        background-position: -130px -415px;
+    }
+
+    .progreso_9 {
+        background-position: -255px -415px;
+    }
+
+    .progreso_10 {
+        background-position: -380px -415px;
+    }
+
+    .progreso_11 {
+        background-position: -505px -415px;
+    }
+
+    .progreso_12 {
+        background-position: -630px -415px;
+    }
+
+
     </style>
 </head>
 <body>
@@ -178,6 +239,7 @@
             <a href="javascript:void(0);" class="boton_avance_circular btn10" >10</a>
             <a href="javascript:void(0);" class="boton_avance_circular btn11" >11</a>
             <a href="javascript:void(0);" class="boton_avance_circular btn12" >12</a>
+            <div class="sprite progreso_0"></div>
         </aside>
         <header class="fijo cabezote"></header>
         <div class="contenido">
