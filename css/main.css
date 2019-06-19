@@ -59,3 +59,15 @@
         line-height: 62;
 
     }*/
+
+    @font-face {
+        font-family: 'MV Boli';
+        src: url('../fonts/MVBoli.eot');
+        src: url('../fonts/MVBoli.eot?#iefix') format('embedded-opentype'),
+            url('../fonts/MVBoli.woff2') format('woff2'),
+            url('../fonts/MVBoli.woff') format('woff'),
+            url('../fonts/MVBoli.ttf') format('truetype'),
+            url('../fonts/MVBoli.svg#MVBoli') format('svg');
+        font-weight: normal;
+        font-style: italic;
+    }

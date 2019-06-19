@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'MV Boli';
+    src: url('MVBoli.eot');
+    src: url('MVBoli.eot?#iefix') format('embedded-opentype'),
+        url('MVBoli.woff2') format('woff2'),
+        url('MVBoli.woff') format('woff'),
+        url('MVBoli.ttf') format('truetype'),
+        url('MVBoli.svg#MVBoli') format('svg');
+    font-weight: normal;
+    font-style: italic;
+}
+
