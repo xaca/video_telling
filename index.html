@@ -11,22 +11,23 @@
 </head>
 <body>
  
-    <div class="contenedor">
-        <aside class="fijo menu_avance">
-            <a href="javascript:void(0);" onclick="actualizarProgreso(1,this);" id="btn1" class="boton_avance_circular btn1 seleccionado">1</a>
-            <a href="javascript:void(0);" onclick="actualizarProgreso(2,this);" id="btn2" class="boton_avance_circular btn2" >2</a>
-            <a href="javascript:void(0);" onclick="actualizarProgreso(3,this);" id="btn3" class="boton_avance_circular btn3" >3</a>
-            <a href="javascript:void(0);" onclick="actualizarProgreso(4,this);" id="btn4" class="boton_avance_circular btn4" >4</a>
-            <a href="javascript:void(0);" onclick="actualizarProgreso(5,this);" id="btn5" class="boton_avance_circular btn5" >5</a>
-            <a href="javascript:void(0);" onclick="actualizarProgreso(6,this);" id="btn6" class="boton_avance_circular btn6" >6</a>
-            <a href="javascript:void(0);" onclick="actualizarProgreso(7,this);" id="btn7" class="boton_avance_circular btn7" >7</a>
-            <a href="javascript:void(0);" onclick="actualizarProgreso(8,this);" id="btn8" class="boton_avance_circular btn8" >8</a>
-            <a href="javascript:void(0);" onclick="actualizarProgreso(9,this);" id="btn9" class="boton_avance_circular btn9" >9</a>
-            <a href="javascript:void(0);" onclick="actualizarProgreso(10,this);" id="btn10" class="boton_avance_circular btn10" >10</a>
-            <a href="javascript:void(0);" onclick="actualizarProgreso(11,this);" id="btn11" class="boton_avance_circular btn11" >11</a>
-            <a href="javascript:void(0);" onclick="actualizarProgreso(12,this);" id="btn12" class="boton_avance_circular btn12" >12</a>
-            <div id="control_progreso" class="sprite progreso_1"></div>
-        </aside>
+    <aside class="fijo menu_avance">
+        <a href="javascript:void(0);" onclick="actualizarProgreso(1,this);" id="btn1" class="boton_avance_circular btn1 seleccionado">1</a>
+        <a href="javascript:void(0);" onclick="actualizarProgreso(2,this);" id="btn2" class="boton_avance_circular btn2" >2</a>
+        <a href="javascript:void(0);" onclick="actualizarProgreso(3,this);" id="btn3" class="boton_avance_circular btn3" >3</a>
+        <a href="javascript:void(0);" onclick="actualizarProgreso(4,this);" id="btn4" class="boton_avance_circular btn4" >4</a>
+        <a href="javascript:void(0);" onclick="actualizarProgreso(5,this);" id="btn5" class="boton_avance_circular btn5" >5</a>
+        <a href="javascript:void(0);" onclick="actualizarProgreso(6,this);" id="btn6" class="boton_avance_circular btn6" >6</a>
+        <a href="javascript:void(0);" onclick="actualizarProgreso(7,this);" id="btn7" class="boton_avance_circular btn7" >7</a>
+        <a href="javascript:void(0);" onclick="actualizarProgreso(8,this);" id="btn8" class="boton_avance_circular btn8" >8</a>
+        <a href="javascript:void(0);" onclick="actualizarProgreso(9,this);" id="btn9" class="boton_avance_circular btn9" >9</a>
+        <a href="javascript:void(0);" onclick="actualizarProgreso(10,this);" id="btn10" class="boton_avance_circular btn10" >10</a>
+        <a href="javascript:void(0);" onclick="actualizarProgreso(11,this);" id="btn11" class="boton_avance_circular btn11" >11</a>
+        <a href="javascript:void(0);" onclick="actualizarProgreso(12,this);" id="btn12" class="boton_avance_circular btn12" >12</a>
+        <div id="control_progreso" class="sprite progreso_1"></div>
+    </aside>
+
+    <div id="seccion_01" class="contenedor">
         <header class="fijo cabezote"></header>
         <div class="contenido">
             <div class="contenedor_texto_casamia">
@@ -48,16 +49,39 @@ Casa mía, es una corporación que nace como una respuesta al miedo y a la indif
                 </a>
             </div>
         </div>
-        <footer class="fijo pata">
+        <footer class="fijo pata_01">
             <div class="logos">
                 <img src="img/logo_colciencias.jpg" alt="">
                 <img src="img/upb_logo.jpg" alt="">
                 <img src="img/logo_region.jpg" alt="">
             </div>
         </footer>
-        <div id="player"></div>
     </div>
 
+    <div id="seccion_02" class="contenedor">
+        <img src="img/agape_logo.png" class="agape" alt="">
+        <header class="fijo cabezote"></header>
+        <img src="img/boton_agape.png" class="boton btn_accion_izq" alt="">
+        <img src="img/boton_agape_continuar.png" class="boton continuar" alt="">
+        <footer class="fijo pata_02">                
+        </footer>
+    </div>
+
+    <div id="seccion_03" class="contenedor">
+        <header class="fijo cabezote"></header>
+        <div class="ventana_pachamama">
+                <img src="img/pachamama_logo.png" class="pachamama" alt="">
+                <img src="img/imagen_mural.png" id="imagen_pachamama" alt="">
+                <h1>Titulo</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel rem perferendis consequuntur dignissimos impedit voluptate ducimus esse pariatur, quis nobis autem tempora ut minus optio atque? Quasi asperiores sequi veniam?</p>
+            </div>
+            <img src="img/boton_ver_informacion_pachamama.png" class="boton btn_accion_izq" alt="">
+            <img src="img/boton_agape_continuar.png" class="boton continuar" alt="">
+            <footer class="fijo pata_03">                
+            </footer>
+        </div>
+    <div id="player"></div>
+    
     <script src="js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.core.min.js"></script>
 </body>
