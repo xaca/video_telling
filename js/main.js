@@ -6,29 +6,29 @@ let sound;
 let control_progreso;
 
 const videos = [];
-videos[1] =  {c:"g1", id:1,v:"IuZWszHATjI",d:false,s:2};
-videos[2] =  {c:"g2", id:2,v:"ESkM5cijr9M",d:false,s:3};
-videos[3] =  {c:"g3", id:3,v:"iS78b5S3BMM",d:false,s:4};
-videos[4] =  {c:"g4", id:4,v:"mKS_DZKLPIw",d:true,s:[5,6,7]};
-videos[5] =  {c:"g5a",id:5,v:"2cYyVdslpEw",d:false,s:[]};
-videos[6] =  {c:"g5b",id:6,v:"YQ7IhAm8s9M",d:false,s:[]};
-videos[7] =  {c:"g6", id:7,v:"QQyXh6SM_sU",d:true,s:[9,10,8]};
-videos[8] =  {c:"g6a",id:8,v:"eUJYq9SzLJ8",d:false,s:[]};
-videos[9] =  {c:"g6b",id:9,v:"rvTJyPWAnHw",d:false,s:[]};
-videos[10] = {c:"g7", id:10,v:"Lj_lYg9dHes",d:false,s:11};
-videos[11] = {c:"g8", id:11,v:"8IFJS_nTulg",d:false,s:12};
-videos[12] = {c:"g9", id:12,v:"fUfDBsZTK1g",d:false,s:-1};//Indica el fin
+videos[1] =  {c:"g1", id:1,v:"UJrPam0C5Vk",d:false,s:2};
+videos[2] =  {c:"g2", id:2,v:"J_USarY7szs",d:false,s:3};
+videos[3] =  {c:"g3", id:3,v:"TJ4hQjqDrOU",d:false,s:4};
+videos[4] =  {c:"g4", id:4,v:"7kOPn7uFfn8",d:true,s:[5,6,7]};
+videos[5] =  {c:"g5a",id:5,v:"78eBaDqOCVc",d:false,s:[]};
+videos[6] =  {c:"g5b",id:6,v:"QFMglskQsDI",d:false,s:[]};
+videos[7] =  {c:"g6", id:7,v:"5zgk1mvyVN0",d:true,s:[9,10,8]};
+videos[8] =  {c:"g6a",id:8,v:"qoI2zUSwRos",d:false,s:[]};
+videos[9] =  {c:"g6b",id:9,v:"4iFtrOVXJjw",d:false,s:[]};
+videos[10] = {c:"g7", id:10,v:"UgUg0fT8Rvw",d:false,s:11};
+videos[11] = {c:"g8", id:11,v:"n1EuIINYmTk",d:false,s:12};
+//videos[12] = {c:"g9", id:12,v:"fUfDBsZTK1g",d:false,s:-1};//Indica el fin
 
 // 2. This code loads the IFrame Player API code asynchronously.
-//var tag = document.createElement('script');
+var tag = document.createElement('script');
 
-/* tag.src = "https://www.youtube.com/iframe_api";
+tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
- */
+
 // 3. This function creates an <iframe> (and YouTube player)
 //    after the API code downloads.
-/* var player;
+var player;
 function onYouTubeIframeAPIReady() {
     video_actual = videos[indice];
     player = new YT.Player('player', {
@@ -41,7 +41,7 @@ function onYouTubeIframeAPIReady() {
         'onStateChange': onPlayerStateChange
         }
     });           
-} */
+}
 
 window.onload = function()
 {
