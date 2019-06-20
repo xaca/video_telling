@@ -287,3 +287,10 @@
     .progreso_12 {
         background-position: -630px -415px;
     }
+    
+    #player{
+        top: 0px;
+        left: 0px;
+        position: fixed;
+        z-index: -2;
+    }

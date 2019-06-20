@@ -56,7 +56,7 @@ window.onload = function()
 
 // 4. The API will call this function when the video player is ready.
 function onPlayerReady(event) {            
-    event.target.playVideo();
+    //event.target.playVideo();
 }
 
 function izquierda(){
@@ -116,7 +116,7 @@ function cargarVideo(indice){
 }
 
 function onPlayerStateChange(event) {
-    if (event.data == YT.PlayerState.PLAYING) {
+   /*  if (event.data == YT.PlayerState.PLAYING) {
         sound.play();
     }
     if(event.data == YT.PlayerState.PAUSED)
@@ -154,7 +154,7 @@ function onPlayerStateChange(event) {
                 imagen:"img/"+video_actual.c+".jpg"
             });
         }
-    }
+    } */
 }
 
 function ocultarMensaje()
