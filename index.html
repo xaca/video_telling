@@ -90,6 +90,7 @@
         height: 310px;
         width: 100px;
         border-radius: 20px 0 0 20px;
+        z-index: 2;
     }
     .boton_avance_circular{
         position: absolute;
@@ -227,19 +228,19 @@
  
     <div class="contenedor">
         <aside class="fijo menu_avance">
-            <a href="javascript:void(0);" class="boton_avance_circular btn1 seleccionado">1</a>
-            <a href="javascript:void(0);" class="boton_avance_circular btn2" >2</a>
-            <a href="javascript:void(0);" class="boton_avance_circular btn3" >3</a>
-            <a href="javascript:void(0);" class="boton_avance_circular btn4" >4</a>
-            <a href="javascript:void(0);" class="boton_avance_circular btn5" >5</a>
-            <a href="javascript:void(0);" class="boton_avance_circular btn6" >6</a>
-            <a href="javascript:void(0);" class="boton_avance_circular btn7" >7</a>
-            <a href="javascript:void(0);" class="boton_avance_circular btn8" >8</a>
-            <a href="javascript:void(0);" class="boton_avance_circular btn9" >9</a>
-            <a href="javascript:void(0);" class="boton_avance_circular btn10" >10</a>
-            <a href="javascript:void(0);" class="boton_avance_circular btn11" >11</a>
-            <a href="javascript:void(0);" class="boton_avance_circular btn12" >12</a>
-            <div class="sprite progreso_0"></div>
+            <a href="javascript:void(0);" onclick="actualizarProgreso(1,this);" id="btn1" class="boton_avance_circular btn1 seleccionado">1</a>
+            <a href="javascript:void(0);" onclick="actualizarProgreso(2,this);" id="btn2" class="boton_avance_circular btn2" >2</a>
+            <a href="javascript:void(0);" onclick="actualizarProgreso(3,this);" id="btn3" class="boton_avance_circular btn3" >3</a>
+            <a href="javascript:void(0);" onclick="actualizarProgreso(4,this);" id="btn4" class="boton_avance_circular btn4" >4</a>
+            <a href="javascript:void(0);" onclick="actualizarProgreso(5,this);" id="btn5" class="boton_avance_circular btn5" >5</a>
+            <a href="javascript:void(0);" onclick="actualizarProgreso(6,this);" id="btn6" class="boton_avance_circular btn6" >6</a>
+            <a href="javascript:void(0);" onclick="actualizarProgreso(7,this);" id="btn7" class="boton_avance_circular btn7" >7</a>
+            <a href="javascript:void(0);" onclick="actualizarProgreso(8,this);" id="btn8" class="boton_avance_circular btn8" >8</a>
+            <a href="javascript:void(0);" onclick="actualizarProgreso(9,this);" id="btn9" class="boton_avance_circular btn9" >9</a>
+            <a href="javascript:void(0);" onclick="actualizarProgreso(10,this);" id="btn10" class="boton_avance_circular btn10" >10</a>
+            <a href="javascript:void(0);" onclick="actualizarProgreso(11,this);" id="btn11" class="boton_avance_circular btn11" >11</a>
+            <a href="javascript:void(0);" onclick="actualizarProgreso(12,this);" id="btn12" class="boton_avance_circular btn12" >12</a>
+            <div id="control_progreso" class="sprite progreso_1"></div>
         </aside>
         <header class="fijo cabezote"></header>
         <div class="contenido">
@@ -271,7 +272,7 @@ Casa mía, es una corporación que nace como una respuesta al miedo y a la indif
         </footer>
     </div>
 
-    <script> src="js/main.js"</script>
+    <script src="js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.core.min.js"></script>
 </body>
 </html>

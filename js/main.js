@@ -2,8 +2,8 @@ let indice = 1;
 let fin_escena = false;
 let interval_id;
 let video_actual;
-
 let sound;
+let control_progreso;
 
 const videos = [];
 videos[1] =  {c:"g1", id:1,v:"IuZWszHATjI",d:false,s:2};
@@ -51,6 +51,7 @@ window.onload = function()
         loop: true,
         preload :true
     }); */
+    control_progreso = document.getElementById("control_progreso");
 }
 
 // 4. The API will call this function when the video player is ready.
@@ -78,8 +79,31 @@ function arriba(){
     ocultarMensaje();
 }
 
+function quitarSeleccion()
+{
+    let botones = document.getElementsByClassName("boton_avance_circular");
+    let cont = 1;
+    for (const key in botones) {
+        botones[key].className = "boton_avance_circular btn"+cont++;
+    }
+}
+
+function actualizarProgreso(indice, target)
+{
+    quitarSeleccion();
+    seleccionarBoton(target.id);
+    control_progreso.className = "sprite progreso_"+indice;
+}
+
+function seleccionarBoton(id)
+{
+    document.getElementById(id).className = "boton_avance_circular seleccionado "+id;
+}
+
 function cargarVideo(indice){
-    if(indice>0){
+    
+    /*if(indice>0){
+        
         ocultarMensaje();
         fin_escena = false;
         video_actual = videos[indice];            
@@ -88,7 +112,7 @@ function cargarVideo(indice){
     else{
         detenerVideo();
         alert("fin de la experiencia :)");
-    }
+    }*/
 }
 
 function onPlayerStateChange(event) {
@@ -101,21 +125,10 @@ function onPlayerStateChange(event) {
     }
     if(event.data == YT.PlayerState.ENDED){
         sound.pause();
-        /*if(!Array.isArray(video_actual.s))
-        {
-            cargarVideo(video_actual.s);
-        }
-        else
-        {
-            //Aca se debe cargar la imagen de fondo
-            //Cuando el usuario navega por las opciones se repite el video anterior,
-            //Pendiente la logica para volver a la imagen.
-            detenerVideo();
-        }*/
+       
         if(Array.isArray(video_actual.s))
         {
             let controles_config = "";
-            //cargarVideo(video_actual.s);
             if(video_actual.id == 4 || video_actual.id == 5 || video_actual.id == 6)
             {
                 video_actual = videos[4];
@@ -176,8 +189,6 @@ function cargarPlay(siguiente)
 }
 function cargarImagen(imagen)
 {
-    
-    //mensaje.innerHTML += "<img style='max-width:100%;' src='"+imagen+"' />";
     mensaje.style.backgroundImage = 'url("'+imagen+'")';
     mensaje.style.backgroundSize = "cover";
 }
