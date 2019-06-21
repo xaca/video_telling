@@ -4,6 +4,7 @@ let interval_id;
 let video_actual;
 let sound;
 let control_progreso;
+let boton_ventana_pachamama, boton_cerrar_ventana;
 
 const videos = [];
 videos[1] =  {c:"g1", id:1,v:"UJrPam0C5Vk",d:false,s:2};
@@ -51,9 +52,33 @@ window.onload = function()
         loop: true,
         preload :true
     }); */
-    control_progreso = document.getElementById("control_progreso");
+    asignarReferencias();
+    agregarEventos();
 }
 
+function asignarReferencias()
+{
+    control_progreso = document.getElementById("control_progreso");
+    boton_ventana_pachamama = document.getElementById("boton_ventana_pachamama");
+    boton_cerrar_ventana = document.getElementById("boton_cerrar_ventana");
+}
+function agregarEventos()
+{
+    boton_ventana_pachamama.addEventListener("click",abrirVentana);
+    boton_cerrar_ventana.addEventListener("click",cerrarVentana); 
+}
+
+function abrirVentana()
+{
+    let ventana = document.getElementById("ventana_pachamama");
+    ventana.className = "animated fadeInDown";
+}
+
+function cerrarVentana()
+{
+    let ventana = document.getElementById("ventana_pachamama");
+    ventana.className = "animated fadeOutUp"; 
+}
 // 4. The API will call this function when the video player is ready.
 function onPlayerReady(event) {            
     //event.target.playVideo();

@@ -98,7 +98,7 @@
         width: 100%;
         z-index: 2;
     }
-    .ventana_pachamama{
+    #ventana_pachamama{
         position: fixed;
         top: 108px;
         left: 50%;
@@ -115,16 +115,28 @@
         top: 98px;
         left: 98px;
     }
-    .ventana_pachamama h1{
+    #ventana_pachamama h1{
         position: absolute;
+        font-family: 'Montserrat', sans-serif;
         top: 48px;
         left: 435px;
+        font-weight:500;
+        color:white;
     }
-    .ventana_pachamama p{
+    #ventana_pachamama p{
         position: absolute;
+        font-family: 'Montserrat', sans-serif;
         top: 115px;
         left: 436px;
         width: 310px;
+        font-weight:300;
+        color:white;
+    }
+    #boton_cerrar_ventana{
+        position: absolute;
+        top: 59px;
+        right: 60px;
+        cursor: pointer;
     }
     .boton{
         cursor: pointer;
