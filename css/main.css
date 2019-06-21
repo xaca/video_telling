@@ -80,6 +80,9 @@
         display: none;
     }
     #seccion_03{
+        display: none;
+    }
+    #seccion_04{
 
     }
     .agape{
@@ -195,6 +198,15 @@
         bottom:0;
         left: 0;
         background: url("../img/adorno_pata_fondo_03.png");
+        height: 134px;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position-y: bottom
+    }
+    .pata_04{
+        bottom:0;
+        left: 0;
+        background: url("../img/adorno_pata_fondo_04.png");
         height: 134px;
         background-size: 100%;
         background-repeat: no-repeat;
