@@ -17,6 +17,7 @@
         left: 0;
         text-align: center;
         line-height: 62;
+        z-index: -1;
     }    
     .hidden{
         display: none;
