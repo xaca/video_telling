@@ -5,6 +5,7 @@ let video_actual;
 let sound;
 let control_progreso;
 let boton_ventana_pachamama, boton_cerrar_ventana;
+let secciones = [];
 
 const videos = [];
 videos[1] =  {c:"g1", id:1,v:"UJrPam0C5Vk",d:false,s:2};
@@ -56,11 +57,35 @@ window.onload = function()
     agregarEventos();
 }
 
+
 function asignarReferencias()
-{
+{ 
+    secciones[0] = undefined;
+    secciones.push(document.getElementById("seccion_01"));
+    secciones.push(document.getElementById("seccion_02"));
+    secciones.push(document.getElementById("seccion_03"));
+    secciones.push(document.getElementById("seccion_04"));
+    secciones.push(document.getElementById("seccion_05"));
+    secciones.push(document.getElementById("seccion_06"));
+    secciones.push(document.getElementById("seccion_07"));
+    secciones.push(document.getElementById("seccion_08"));
+    secciones.push(document.getElementById("seccion_09"));
+    secciones.push(document.getElementById("seccion_10"));
+    secciones.push(document.getElementById("seccion_11"));
+    secciones.push(document.getElementById("seccion_12"));
     control_progreso = document.getElementById("control_progreso");
     boton_ventana_pachamama = document.getElementById("boton_ventana_pachamama");
     boton_cerrar_ventana = document.getElementById("boton_cerrar_ventana");
+}
+function ocultarSeccion(){
+    for (let i=1;i<secciones.length;i++) {
+        secciones[i].className = "contenedor ocultar";
+    }
+}
+function cargarSeccion(id){
+   ocultarSeccion();
+   console.log(id);
+   secciones[id].className = "contenedor"; 
 }
 function agregarEventos()
 {
@@ -114,10 +139,16 @@ function quitarSeleccion()
     }
 }
 
+function obtenerId(value)
+{
+    return  value.split("btn")[1];
+}
+
 function actualizarProgreso(indice, target)
 {
     quitarSeleccion();
     seleccionarBoton(target.id);
+    cargarSeccion(obtenerId(target.id));
     control_progreso.className = "sprite progreso_"+indice;
 }
 
