@@ -83,9 +83,22 @@
         display: none;
     }
     #seccion_04{
-
+        display: none;
+    }
+    #seccion_05{
+        display: none;
+    }
+    #seccion_06{
     }
     .agape{
+        position:fixed;
+        top: 20px;
+        left: 20px;
+        max-width: 430px;
+        width: 100%;
+        z-index: 2;
+    }
+    .siembra_logo{
         position:fixed;
         top: 20px;
         left: 20px;
@@ -152,6 +165,9 @@
         max-width: 160px;
         width: 100%; 
     }
+    .btn_accion_codigo_honor{
+        left: 210px;
+    }
     .continuar{
         position:fixed;
         bottom: 40px;
@@ -176,41 +192,34 @@
         background-size: 100%;
         background-repeat: no-repeat;
     }
-    .pata_01{
+    .pata{
         bottom:0;
         left: 0;
-        background: url("../img/adorno_pata_fondo.png");
         height: 134px;
         background-size: 100%;
         background-repeat: no-repeat;
-        background-position-y: bottom
+        background-position-y: bottom;
+    }
+    .pata_01{
+        background-image: url("../img/adorno_pata_fondo.png");
     }
     .pata_02{
-        bottom:0;
-        left: 0;
-        background: url("../img/adorno_pata_fondo_02.png");
-        height: 134px;
-        background-size: 100%;
-        background-repeat: no-repeat;
-        background-position-y: bottom
+        background-image: url("../img/adorno_pata_fondo_02.png");
     }
     .pata_03{
-        bottom:0;
-        left: 0;
-        background: url("../img/adorno_pata_fondo_03.png");
-        height: 134px;
-        background-size: 100%;
-        background-repeat: no-repeat;
-        background-position-y: bottom
+        background-image: url("../img/adorno_pata_fondo_03.png");
     }
     .pata_04{
-        bottom:0;
-        left: 0;
-        background: url("../img/adorno_pata_fondo_04.png");
-        height: 134px;
-        background-size: 100%;
-        background-repeat: no-repeat;
-        background-position-y: bottom
+        background-image: url("../img/adorno_pata_fondo_04.png");        
+    }
+    .pata_05{
+        background-image: url("../img/adorno_pata_fondo_05.png");        
+    }
+    .pata_06{
+        background-image: url("../img/adorno_pata_fondo_06.png");        
+    }
+    .pata_07{
+        background-image: url("../img/adorno_pata_fondo_07.png");        
     }
     .contenido{
         display: flex;
