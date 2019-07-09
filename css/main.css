@@ -48,18 +48,6 @@
         width:400px;
         text-align: center;
     }
-    /*#imagen_fin_seccion{
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.6);
-        position: fixed;
-        top: 0;
-        left: 0;
-        text-align: center;
-        line-height: 62;
-
-    }*/
-
     @font-face {
         font-family: 'MV Boli';
         src: url('../fonts/MVBoli.eot');
@@ -71,26 +59,9 @@
         font-weight: normal;
         font-style: italic;
     }
-
-    #seccion_01{
-        /* background: url("../img/fondo_interfaz_01.jpg"); */
+    .ocultar{
         display: none;
-    }
-    #seccion_02{
-        display: none;
-    }
-    #seccion_03{
-        display: none;
-    }
-    #seccion_04{
-        display: none;
-    }
-    #seccion_05{
-        display: none;
-    }
-    #seccion_06{
-        display: none;
-    }
+    }    
     .agape{
         position:fixed;
         top: 20px;
@@ -169,6 +140,22 @@
     .btn_accion_codigo_honor{
         left: 210px;
     }
+    .btn_menu{
+        position: position;
+        width: 100%; 
+        max-width: 160px;
+    }
+    #menu_ave_fenix{
+        position:fixed;
+        bottom: 15px;
+        z-index: 2;
+        width: 490px;
+        left:50%;
+        margin-left: -245px;
+    }
+    .btn_alegria{
+        left:835px;
+    }
     .continuar{
         position:fixed;
         bottom: 40px;
@@ -221,6 +208,21 @@
     }
     .pata_07{
         background-image: url("../img/adorno_pata_fondo_07.png");        
+    }
+    .pata_08{
+        background-image: url("../img/adorno_pata_fondo_08.png");        
+    }
+    .pata_09{
+        background-image: url("../img/adorno_pata_fondo_09.png");        
+    }
+    .pata_10{
+        background-image: url("../img/adorno_pata_fondo_10.png");        
+    }
+    .pata_11{
+        background-image: url("../img/adorno_pata_fondo_11.png");
+    }
+    .pata_12{
+        background-image: url("../img/adorno_pata_fondo_12.png");
     }
     .contenido{
         display: flex;
