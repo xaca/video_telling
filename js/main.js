@@ -4,19 +4,19 @@ let interval_id;
 let video_actual;
 let sound;
 let control_progreso;
-let boton_ventana_pachamama, boton_cerrar_ventana;
+let boton_ventana_pachamama, boton_cerrar_ventana,ventana_pachamama;
 let secciones = [];
-
 const videos = [];
 /*
 c ->Id de la imagen de fondo que se carga al final del video
-s ->Siguiente video
+s ->Siguiente video, o videos si la sección tienen más de un camino
 v ->Id del video de youtube
+d ->Indica si hay un punto de decisión al final del video
 */
 videos[2] =  {c:"g2", id:1,v:"UJrPam0C5Vk",d:false,s:3};
-videos[3] =  {c:"g2", id:2,v:"J_USarY7szs",d:false,s:4};
-videos[4] =  {c:"g3", id:3,v:"TJ4hQjqDrOU",d:false,s:5};
-videos[5] =  {c:"g4", id:4,v:"7kOPn7uFfn8",d:false,s:6};
+videos[3] =  {c:"g3", id:2,v:"J_USarY7szs",d:false,s:4};
+videos[4] =  {c:"g4", id:3,v:"TJ4hQjqDrOU",d:false,s:5};
+videos[5] =  {c:"g5", id:4,v:"7kOPn7uFfn8",d:false,s:6};
 videos[6] =  {c:"g5a",id:5,v:"78eBaDqOCVc",d:true,s:[7,8,9]};
 videos[7] =  {c:"g5b",id:6,v:"QFMglskQsDI",d:false,s:[]};
 videos[8] =  {c:"g6", id:7,v:"5zgk1mvyVN0",d:true,s:[9,10,8]};
@@ -78,6 +78,7 @@ function asignarReferencias()
     secciones[11] = document.getElementById("seccion_11");
     secciones[12] = document.getElementById("seccion_12");
     control_progreso = document.getElementById("control_progreso");
+    ventana_pachamama = document.getElementById("ventana_pachamama");
     boton_ventana_pachamama = document.getElementById("boton_ventana_pachamama");
     boton_cerrar_ventana = document.getElementById("boton_cerrar_ventana");
 }
@@ -89,14 +90,12 @@ function agregarEventos()
 
 function abrirVentana()
 {
-    let ventana = document.getElementById("ventana_pachamama");
-    ventana.className = "animated fadeInDown";
+    TweenLite.to(ventana_pachamama,.5,{top:108,opacity:1});
 }
 
 function cerrarVentana()
 {
-    let ventana = document.getElementById("ventana_pachamama");
-    ventana.className = "animated fadeOutUp"; 
+    TweenLite.to(ventana_pachamama,.5,{top:-502,opacity:0}); 
 }
 // 4. The API will call this function when the video player is ready.
 function onPlayerReady(event) {            
@@ -159,12 +158,22 @@ function seleccionarBoton(id)
 {
     document.getElementById(id).className = "boton_avance_circular seleccionado "+id;
 }
-
+function ocultarControlesUI(seccion)
+{
+    TweenLite.to(seccion + " header",.5,{top:-220});
+    TweenLite.to(seccion + " footer",.5,{bottom:-194});
+}
+function mostarControlesUI(seccion)
+{
+    TweenLite.to(seccion + " header",.5,{top:0});
+    TweenLite.to(seccion + " footer",.5,{bottom:0});
+}
 function cargarVideo(indice){
     console.log(indice)
     if(indice>0){
         
-        //ocultarMensaje();
+        ocultarMensaje();
+        //ocultarControlesUI("#seccion_02");
         fin_escena = false;
         video_actual = videos[indice];            
         player.loadVideoById(video_actual.v, 0, "default");
@@ -185,7 +194,7 @@ function onPlayerStateChange(event) {
     }
     if(event.data == YT.PlayerState.ENDED){
         //sound.pause();
-       console.log(video_actual);
+        //mostarControlesUI("#seccion_02");
         if(Array.isArray(video_actual.s))
         {
             /*
@@ -252,6 +261,8 @@ function cargarImagen(imagen)
 {
     mensaje.style.backgroundImage = 'url("'+imagen+'")';
     mensaje.style.backgroundSize = "cover";
+    mensaje.style.opacity = 0;
+    TweenLite.to(mensaje,.5,{opacity:1});
 }
 
 function cargarControles(controles)
