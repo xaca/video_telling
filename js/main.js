@@ -13,17 +13,17 @@ s ->Siguiente video, o videos si la sección tienen más de un camino
 v ->Id del video de youtube
 d ->Indica si hay un punto de decisión al final del video
 */
-videos[2] =  {c:"g2", id:1,v:"UJrPam0C5Vk",d:false,s:3};
-videos[3] =  {c:"g3", id:2,v:"J_USarY7szs",d:false,s:4};
-videos[4] =  {c:"g4", id:3,v:"TJ4hQjqDrOU",d:false,s:5};
-videos[5] =  {c:"g5", id:4,v:"7kOPn7uFfn8",d:false,s:6};
-videos[6] =  {c:"g5a",id:5,v:"78eBaDqOCVc",d:true,s:[7,8,9]};
-videos[7] =  {c:"g5b",id:6,v:"QFMglskQsDI",d:false,s:[]};
-videos[8] =  {c:"g6", id:7,v:"5zgk1mvyVN0",d:true,s:[9,10,8]};
-videos[9] =  {c:"g6a",id:8,v:"qoI2zUSwRos",d:false,s:[]};
-videos[10] =  {c:"g6b",id:9,v:"4iFtrOVXJjw",d:false,s:[]};
-videos[11] = {c:"g7", id:10,v:"UgUg0fT8Rvw",d:false,s:11};
-videos[12] = {c:"g8", id:11,v:"n1EuIINYmTk",d:false,s:12};
+videos[2] =  {c:"g2", id:2,v:"UJrPam0C5Vk",d:false,s:3};
+videos[3] =  {c:"g3", id:3,v:"J_USarY7szs",d:false,s:4};
+videos[4] =  {c:"g4", id:4,v:"TJ4hQjqDrOU",d:false,s:5};
+videos[5] =  {c:"g5", id:5,v:"7kOPn7uFfn8",d:false,s:6};
+videos[6] =  {c:"g6", id:6,v:"78eBaDqOCVc",d:true,s:[7,8,9]};
+videos[7] =  {c:"g5b",id:7,v:"QFMglskQsDI",d:false,s:[]};
+videos[8] =  {c:"g6", id:8,v:"5zgk1mvyVN0",d:true,s:[9,10,8]};
+videos[9] =  {c:"g6a",id:9,v:"qoI2zUSwRos",d:false,s:[]};
+videos[10] =  {c:"g6b",id:10,v:"4iFtrOVXJjw",d:false,s:[]};
+videos[11] = {c:"g7", id:11,v:"UgUg0fT8Rvw",d:false,s:11};
+videos[12] = {c:"g8", id:12,v:"n1EuIINYmTk",d:false,s:12};
 //videos[12] = {c:"g9", id:12,v:"fUfDBsZTK1g",d:false,s:-1};//Indica el fin
 
 // 2. This code loads the IFrame Player API code asynchronously.
@@ -158,24 +158,48 @@ function seleccionarBoton(id)
 {
     document.getElementById(id).className = "boton_avance_circular seleccionado "+id;
 }
+function calcularSelectorSeccion(seccion)
+{
+    let selector;
+    switch(seccion)
+    {
+        case 2: selector = "#seccion_02";
+                break;
+        case 3: selector = "#seccion_03";
+                break;
+        case 4: selector = "#seccion_04";
+                break;
+        case 5: selector = "#seccion_05";
+                break;
+        case 6: selector = "#seccion_06";
+                break;
+    }
+    return selector;
+}
 function ocultarControlesUI(seccion)
 {
-    TweenLite.to(seccion + " header",.5,{top:-220});
-    TweenLite.to(seccion + " footer",.5,{bottom:-194});
+    let selector = calcularSelectorSeccion(seccion);
+    if(selector)
+    {
+        TweenLite.to(selector+" header",.5,{top:-220});
+        TweenLite.to(selector+" footer",.5,{bottom:-194});
+    }
 }
 function mostarControlesUI(seccion)
 {
-    TweenLite.to(seccion + " header",.5,{top:0});
-    TweenLite.to(seccion + " footer",.5,{bottom:0});
+    let selector = calcularSelectorSeccion(seccion);
+    if(selector)
+    {
+        TweenLite.to(selector+" header",.5,{top:0});
+        TweenLite.to(selector+" footer",.5,{bottom:0});
+    }
 }
 function cargarVideo(indice){
-    console.log(indice)
     if(indice>0){
-        
         ocultarMensaje();
-        //ocultarControlesUI("#seccion_02");
         fin_escena = false;
         video_actual = videos[indice];            
+        ocultarControlesUI(video_actual.id);
         player.loadVideoById(video_actual.v, 0, "default");
     }
     else{
@@ -194,36 +218,11 @@ function onPlayerStateChange(event) {
     }
     if(event.data == YT.PlayerState.ENDED){
         //sound.pause();
-        //mostarControlesUI("#seccion_02");
-        if(Array.isArray(video_actual.s))
-        {
-            /*
-            let controles_config = "";
-            if(video_actual.id == 4 || video_actual.id == 5 || video_actual.id == 6)
-            {
-                video_actual = videos[4];
-                controles_config = "i,v,d";
-            }
-
-            if(video_actual.id == 7 || video_actual.id == 8 || video_actual.id == 9)
-            {
-                video_actual = videos[7];
-                controles_config = "i,d,a";
-            }
-            */
-            /*mostrarMensaje({
-                estado:"CONDICIONAL",
-                controles:controles_config,
-                imagen:"img/"+video_actual.c+".jpg"
-            });*/
-        }
-        else
-        {
-           mostrarMensaje({
-                estado:"FIN_VIDEO",
-                imagen:"img/"+video_actual.c+".jpg"
-            }); 
-        }
+        mostarControlesUI(video_actual.id);
+        mostrarMensaje({
+             estado:"FIN_VIDEO",
+             imagen:"img/"+video_actual.c+".jpg"
+         });         
     }
 }
 
