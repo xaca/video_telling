@@ -18,8 +18,8 @@ videos[3] =  {c:"g3", id:3,v:"J_USarY7szs",d:false,s:4};
 videos[4] =  {c:"g4", id:4,v:"TJ4hQjqDrOU",d:false,s:5};
 videos[5] =  {c:"g5", id:5,v:"7kOPn7uFfn8",d:false,s:6};
 videos[6] =  {c:"g6", id:6,v:"78eBaDqOCVc",d:true,s:[7,8,9]};
-videos[7] =  {c:"g5b",id:7,v:"QFMglskQsDI",d:false,s:[]};
-videos[8] =  {c:"g6", id:8,v:"5zgk1mvyVN0",d:true,s:[9,10,8]};
+videos[7] =  {c:"g7",id:7,v:"QFMglskQsDI",d:false,s:[]};
+videos[8] =  {c:"g8", id:8,v:"5zgk1mvyVN0",d:true,s:[9,10,8]};
 videos[9] =  {c:"g6a",id:9,v:"qoI2zUSwRos",d:false,s:[]};
 videos[10] =  {c:"g6b",id:10,v:"4iFtrOVXJjw",d:false,s:[]};
 videos[11] = {c:"g7", id:11,v:"UgUg0fT8Rvw",d:false,s:11};
@@ -172,6 +172,12 @@ function calcularSelectorSeccion(seccion)
         case 5: selector = "#seccion_05";
                 break;
         case 6: selector = "#seccion_06";
+                break;
+        case 7: selector = "#seccion_07";
+                break;
+        case 8: selector = "#seccion_08";
+                break;
+        case 9: selector = "#seccion_09";
                 break;
     }
     return selector;
