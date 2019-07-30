@@ -5,6 +5,7 @@ let video_actual;
 let sound;
 let control_progreso;
 let boton_ventana_pachamama, boton_cerrar_ventana,ventana_pachamama;
+let btn_cerrar_video_layer, player_layer_wrap;
 let secciones = [];
 const videos = [];
 const videos_especiales = [];
@@ -101,18 +102,26 @@ function asignarReferencias()
     ventana_pachamama = document.getElementById("ventana_pachamama");
     boton_ventana_pachamama = document.getElementById("boton_ventana_pachamama");
     boton_cerrar_ventana = document.getElementById("boton_cerrar_ventana");
+    btn_cerrar_video_layer = document.getElementById("cerrar_video_layer");
+    player_layer_wrap = document.getElementById("player_layer");
 }
 function agregarEventos()
 {
     boton_ventana_pachamama.addEventListener("click",abrirVentana);
     boton_cerrar_ventana.addEventListener("click",cerrarVentana); 
+    btn_cerrar_video_layer.addEventListener("click",cerrarLayerVideo);
 }
 
 function abrirVentana()
 {
     TweenLite.to(ventana_pachamama,.5,{top:108,opacity:1});
 }
-
+function cerrarLayerVideo(){    
+    TweenLite.to(player_layer_wrap,.5,{top:"-100%",opacity:0}); 
+}
+function abrirLayerVideo(){    
+    TweenLite.to(player_layer_wrap,.5,{opacity:1,top:0}); 
+}
 function cerrarVentana()
 {
     TweenLite.to(ventana_pachamama,.5,{top:-522,opacity:0}); 
