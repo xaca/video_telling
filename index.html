@@ -28,7 +28,11 @@
         <a href="javascript:void(0);" onclick="actualizarProgreso(12,this);" id="btn12" class="boton_avance_circular btn12" >12</a>
         <div id="control_progreso" class="sprite progreso_1"></div>
     </aside>
-
+    <div id="player_layer">
+        <span id="cerrar_video_layer">X</span>
+        <div id="fake_layer"></div>
+        <div id="video_layer"></div>
+    </div>
     <div id="seccion_01" class="contenedor">
         <header class="fijo cabezote"></header>
         <div class="contenido">
@@ -71,7 +75,9 @@ Casa mía, es una corporación que nace como una respuesta al miedo y a la indif
     </div>
 
     <div id="seccion_03" class="contenedor ocultar">
-        <header class="fijo cabezote"></header>
+        <header class="fijo cabezote">
+            <img src="img/pachamama_logo.png" class="pachamama titulo_pachamama" alt="">
+        </header>
             <div id="ventana_pachamama">
                 <img src="img/boton_cerrar.png" id="boton_cerrar_ventana" alt="">
                 <img src="img/pachamama_logo.png" class="pachamama" alt="">

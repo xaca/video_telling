@@ -7,6 +7,7 @@ let control_progreso;
 let boton_ventana_pachamama, boton_cerrar_ventana,ventana_pachamama;
 let secciones = [];
 const videos = [];
+const videos_especiales = [];
 /*
 c ->Id de la imagen de fondo que se carga al final del video
 s ->Siguiente video, o videos si la sección tienen más de un camino
@@ -20,11 +21,20 @@ videos[5] =  {c:"g5", id:5,v:"7kOPn7uFfn8",d:false,s:6};
 videos[6] =  {c:"g6", id:6,v:"78eBaDqOCVc",d:true,s:[7,8,9]};
 videos[7] =  {c:"g7",id:7,v:"QFMglskQsDI",d:false,s:[]};
 videos[8] =  {c:"g8", id:8,v:"5zgk1mvyVN0",d:true,s:[9,10,8]};
-videos[9] =  {c:"g6a",id:9,v:"qoI2zUSwRos",d:false,s:[]};
-videos[10] =  {c:"g6b",id:10,v:"4iFtrOVXJjw",d:false,s:[]};
-videos[11] = {c:"g7", id:11,v:"UgUg0fT8Rvw",d:false,s:11};
-videos[12] = {c:"g8", id:12,v:"n1EuIINYmTk",d:false,s:12};
+videos[9] =  {c:"g9",id:9,v:"qoI2zUSwRos",d:false,s:[]};
+videos[10] =  {c:"g10",id:10,v:"4iFtrOVXJjw",d:false,s:[]};
+videos[11] = {c:"g11", id:11,v:"UgUg0fT8Rvw",d:false,s:11};
+videos[12] = {c:"g12", id:12,v:"n1EuIINYmTk",d:false,s:12};
 //videos[12] = {c:"g9", id:12,v:"fUfDBsZTK1g",d:false,s:-1};//Indica el fin
+
+videos_especiales[0] = {v:"SNlk6mtJ9nE",name:"Agape"};
+videos_especiales[1] = {v:"Dna_LScGuZo",name:"Siembra"};
+videos_especiales[2] = {v:"BAWAmyKjzfY",name:"Alegría"};
+videos_especiales[3] = {v:"oqvqbLuzAhw",name:"Agora"};
+videos_especiales[4] = {v:"OtdlX94OLCk",name:"Laberinto"};
+videos_especiales[5] = {v:"apB9MJ-2doQ",name:"Los Sueños"};
+videos_especiales[6] = {v:"RYAaBHdN5Ek",name:"Memoria"};
+videos_especiales[7] = {v:"mAxXJFbvrK0",name:"Sanedrín"};
 
 // 2. This code loads the IFrame Player API code asynchronously.
 var tag = document.createElement('script');
@@ -35,7 +45,7 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 // 3. This function creates an <iframe> (and YouTube player)
 //    after the API code downloads.
-var player;
+var player, player_layer;
 function onYouTubeIframeAPIReady() {
     video_actual = videos[indice];
     player = new YT.Player('player', {
@@ -47,17 +57,27 @@ function onYouTubeIframeAPIReady() {
         'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange
         }
-    });           
+    });
+    player_layer = new YT.Player('video_layer', {
+        height: '100%',
+        width: '100%',
+        videoId: "SNlk6mtJ9nE",
+        playerVars:{ 'autoplay': 1, 'controls': 0, 'rel': 0, 'modestbranding':0, 'showinfo':0 },
+        events: {
+        'onReady': ()=>{},
+        'onStateChange': ()=>{}
+        }
+    });         
 }
 
 window.onload = function()
 {
-    /* sound = new Howl({
+    /*sound = new Howl({
         src: ['sounds/JuneBug.mp3'],
         autoplay: false,
         loop: true,
         preload :true
-    }); */
+    });*/
     asignarReferencias();
     agregarEventos();
 }
@@ -95,7 +115,7 @@ function abrirVentana()
 
 function cerrarVentana()
 {
-    TweenLite.to(ventana_pachamama,.5,{top:-502,opacity:0}); 
+    TweenLite.to(ventana_pachamama,.5,{top:-522,opacity:0}); 
 }
 // 4. The API will call this function when the video player is ready.
 function onPlayerReady(event) {            
@@ -139,18 +159,22 @@ function quitarSeleccion()
 function actualizarProgreso(indice, target)
 {
     let id_simple = obtenerId(target.id);
+    detenerVideo();
     quitarSeleccion();
     seleccionarBoton(target.id);
     cargarSeccion(id_simple);
     cargarVideo(id_simple);
     control_progreso.className = "sprite progreso_"+indice;
 }
-function ocultarSeccion(){
-    for (let i=1;i<secciones.length;i++) {
+function ocultarSeccion()
+{
+    for (let i=1;i<secciones.length;i++)
+    {
         secciones[i].className = "contenedor ocultar";
     }
 }
-function cargarSeccion(id){
+function cargarSeccion(id)
+{
    ocultarSeccion();
    secciones[id].className = "contenedor"; 
 }
@@ -160,26 +184,7 @@ function seleccionarBoton(id)
 }
 function calcularSelectorSeccion(seccion)
 {
-    let selector;
-    switch(seccion)
-    {
-        case 2: selector = "#seccion_02";
-                break;
-        case 3: selector = "#seccion_03";
-                break;
-        case 4: selector = "#seccion_04";
-                break;
-        case 5: selector = "#seccion_05";
-                break;
-        case 6: selector = "#seccion_06";
-                break;
-        case 7: selector = "#seccion_07";
-                break;
-        case 8: selector = "#seccion_08";
-                break;
-        case 9: selector = "#seccion_09";
-                break;
-    }
+    let selector = "#seccion_"+((seccion<10)?"0"+seccion:seccion);
     return selector;
 }
 function ocultarControlesUI(seccion)
@@ -187,7 +192,7 @@ function ocultarControlesUI(seccion)
     let selector = calcularSelectorSeccion(seccion);
     if(selector)
     {
-        TweenLite.to(selector+" header",.5,{top:-220});
+        TweenLite.to(selector+" header",.5,{top:-239});
         TweenLite.to(selector+" footer",.5,{bottom:-194});
     }
 }
@@ -304,7 +309,8 @@ function cargarControles(controles)
     mensaje.innerHTML += salida;
 }
 
-function detenerVideo() {
+function detenerVideo() 
+{
     player.stopVideo();            
 }
 function pausarVideo()
