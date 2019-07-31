@@ -5,7 +5,8 @@ let video_actual;
 let sound;
 let control_progreso;
 let boton_ventana_pachamama, boton_cerrar_ventana,ventana_pachamama;
-let btn_cerrar_video_layer, player_layer_wrap;
+let btn_cerrar_video_layer, player_layer_wrap, layer_actual;
+let btn_ver_video_agape;
 let secciones = [];
 const videos = [];
 const videos_especiales = [];
@@ -49,6 +50,7 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var player, player_layer;
 function onYouTubeIframeAPIReady() {
     video_actual = videos[indice];
+    layer_actual = videos_especiales[0];
     player = new YT.Player('player', {
         height: '100%',
         width: '100%',
@@ -65,8 +67,12 @@ function onYouTubeIframeAPIReady() {
         videoId: "SNlk6mtJ9nE",
         playerVars:{ 'autoplay': 1, 'controls': 0, 'rel': 0, 'modestbranding':0, 'showinfo':0 },
         events: {
-        'onReady': ()=>{},
-        'onStateChange': ()=>{}
+        'onReady': ()=>{player_layer.stopVideo()},
+        'onStateChange': (event)=>{
+            if(event.data == YT.PlayerState.ENDED){
+                cerrarLayerVideo();
+            }
+        }
         }
     });         
 }
@@ -104,23 +110,33 @@ function asignarReferencias()
     boton_cerrar_ventana = document.getElementById("boton_cerrar_ventana");
     btn_cerrar_video_layer = document.getElementById("cerrar_video_layer");
     player_layer_wrap = document.getElementById("player_layer");
+    btn_ver_video_agape = document.getElementById("ver_video_agape");
 }
 function agregarEventos()
 {
     boton_ventana_pachamama.addEventListener("click",abrirVentana);
     boton_cerrar_ventana.addEventListener("click",cerrarVentana); 
     btn_cerrar_video_layer.addEventListener("click",cerrarLayerVideo);
+    btn_ver_video_agape.addEventListener("click",abrirLayerVideo);
 }
-
+function asignarVideoLayer(data){
+    player_layer.loadVideoById(data.v, 0, "default");
+}
 function abrirVentana()
 {
     TweenLite.to(ventana_pachamama,.5,{top:108,opacity:1});
 }
-function cerrarLayerVideo(){    
-    TweenLite.to(player_layer_wrap,.5,{top:"-100%",opacity:0}); 
+function cerrarLayerVideo()
+{  
+    player_layer.stopVideo();  
+    TweenLite.to(player_layer_wrap,.5,{top:"-100%",opacity:0,zIndex:0}); 
 }
-function abrirLayerVideo(){    
-    TweenLite.to(player_layer_wrap,.5,{opacity:1,top:0}); 
+function abrirLayerVideo()
+{    
+    TweenLite.to(player_layer_wrap,
+        .5,{opacity:1,top:0,zIndex:2,onComplete:()=>{
+            asignarVideoLayer(layer_actual);
+        }}); 
 }
 function cerrarVentana()
 {
