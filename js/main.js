@@ -9,7 +9,7 @@ let btn_cerrar_video_layer, player_layer_wrap, layer_actual;
 let btn_ver_video_agape,btn_ver_video_siembra, btn_ver_video_sanedrin;
 let btn_ver_video_laberinto,btn_ver_video_oraculo,btn_ver_video_memoria;
 let btn_ver_video_alegria,btn_ver_video_alegria_layer,btn_ver_video_agora;
-let btn_ver_video_suenos;
+let btn_ver_video_suenos,btn_comenzar_experiencia,btn_continuar;
 let secciones = [];
 const videos = [];
 const videos_especiales = [];
@@ -123,6 +123,8 @@ function asignarReferencias()
     btn_ver_video_alegria_layer = document.getElementById("ver_video_alegria_layer");
     btn_ver_video_agora = document.getElementById("ver_video_agora");
     btn_ver_video_suenos = document.getElementById("ver_video_suenos");
+    btn_comenzar_experiencia = document.getElementById("comenzar_experiencia");
+    //btn_continuar = document.getElementById("continuar");
 }
 function agregarEventos()
 {
@@ -157,6 +159,12 @@ function agregarEventos()
     btn_ver_video_suenos.addEventListener("click",()=>{
         cargarLayer(6);
     });
+    btn_comenzar_experiencia.addEventListener("click",()=>{
+        document.getElementById("btn2").click();
+    });
+    /* btn_continuar.addEventListener("click",()=>{
+        console.dir(video_actual);
+    }); */
 }
 function cargarLayer(id)
 {
