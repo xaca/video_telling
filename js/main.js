@@ -6,7 +6,10 @@ let sound;
 let control_progreso;
 let boton_ventana_pachamama, boton_cerrar_ventana,ventana_pachamama;
 let btn_cerrar_video_layer, player_layer_wrap, layer_actual;
-let btn_ver_video_agape;
+let btn_ver_video_agape,btn_ver_video_siembra, btn_ver_video_sanedrin;
+let btn_ver_video_laberinto,btn_ver_video_oraculo,btn_ver_video_memoria;
+let btn_ver_video_alegria,btn_ver_video_alegria_layer,btn_ver_video_agora;
+let btn_ver_video_suenos;
 let secciones = [];
 const videos = [];
 const videos_especiales = [];
@@ -31,12 +34,12 @@ videos[12] = {c:"g12", id:12,v:"n1EuIINYmTk",d:false,s:12};
 
 videos_especiales[0] = {v:"SNlk6mtJ9nE",name:"Agape"};
 videos_especiales[1] = {v:"Dna_LScGuZo",name:"Siembra"};
-videos_especiales[2] = {v:"BAWAmyKjzfY",name:"Alegría"};
-videos_especiales[3] = {v:"oqvqbLuzAhw",name:"Agora"};
-videos_especiales[4] = {v:"OtdlX94OLCk",name:"Laberinto"};
-videos_especiales[5] = {v:"apB9MJ-2doQ",name:"Los Sueños"};
-videos_especiales[6] = {v:"RYAaBHdN5Ek",name:"Memoria"};
-videos_especiales[7] = {v:"mAxXJFbvrK0",name:"Sanedrín"};
+videos_especiales[2] = {v:"mAxXJFbvrK0",name:"Sanedrín"};
+videos_especiales[3] = {v:"OtdlX94OLCk",name:"Laberinto"};
+videos_especiales[4] = {v:"BAWAmyKjzfY",name:"Alegría"};
+videos_especiales[5] = {v:"oqvqbLuzAhw",name:"Agora"};
+videos_especiales[6] = {v:"apB9MJ-2doQ",name:"Los Sueños"};
+videos_especiales[7] = {v:"RYAaBHdN5Ek",name:"Memoria"};
 
 // 2. This code loads the IFrame Player API code asynchronously.
 var tag = document.createElement('script');
@@ -64,7 +67,7 @@ function onYouTubeIframeAPIReady() {
     player_layer = new YT.Player('video_layer', {
         height: '100%',
         width: '100%',
-        videoId: "SNlk6mtJ9nE",
+        videoId: layer_actual.v,
         playerVars:{ 'autoplay': 1, 'controls': 0, 'rel': 0, 'modestbranding':0, 'showinfo':0 },
         events: {
         'onReady': ()=>{player_layer.stopVideo()},
@@ -111,6 +114,15 @@ function asignarReferencias()
     btn_cerrar_video_layer = document.getElementById("cerrar_video_layer");
     player_layer_wrap = document.getElementById("player_layer");
     btn_ver_video_agape = document.getElementById("ver_video_agape");
+    btn_ver_video_siembra = document.getElementById("ver_video_siembra");
+    btn_ver_video_sanedrin = document.getElementById("ver_video_sanedrin");
+    btn_ver_video_laberinto = document.getElementById("ver_video_laberinto");
+    btn_ver_video_oraculo = document.getElementById("ver_video_oraculo");
+    btn_ver_video_memoria = document.getElementById("ver_video_memoria");
+    btn_ver_video_alegria = document.getElementById("ver_video_alegria");
+    btn_ver_video_alegria_layer = document.getElementById("ver_video_alegria_layer");
+    btn_ver_video_agora = document.getElementById("ver_video_agora");
+    btn_ver_video_suenos = document.getElementById("ver_video_suenos");
 }
 function agregarEventos()
 {
@@ -118,6 +130,38 @@ function agregarEventos()
     boton_cerrar_ventana.addEventListener("click",cerrarVentana); 
     btn_cerrar_video_layer.addEventListener("click",cerrarLayerVideo);
     btn_ver_video_agape.addEventListener("click",abrirLayerVideo);
+    btn_ver_video_siembra.addEventListener("click",()=>{
+        cargarLayer(1);
+    });
+    btn_ver_video_sanedrin.addEventListener("click",()=>{
+        cargarLayer(2);
+    });
+    btn_ver_video_laberinto.addEventListener("click",()=>{
+        cargarLayer(3);
+    });
+    btn_ver_video_oraculo.addEventListener("click",()=>{
+        document.getElementById("btn8").click();
+    });
+    btn_ver_video_memoria.addEventListener("click",()=>{
+        document.getElementById("btn9").click();
+    });
+    btn_ver_video_alegria.addEventListener("click",()=>{
+        document.getElementById("btn10").click();
+    });
+    btn_ver_video_alegria_layer.addEventListener("click",()=>{
+        cargarLayer(4);
+    });
+    btn_ver_video_agora.addEventListener("click",()=>{
+        cargarLayer(5);
+    });
+    btn_ver_video_suenos.addEventListener("click",()=>{
+        cargarLayer(6);
+    });
+}
+function cargarLayer(id)
+{
+    layer_actual = videos_especiales[id];
+    abrirLayerVideo();
 }
 function asignarVideoLayer(data){
     player_layer.loadVideoById(data.v, 0, "default");

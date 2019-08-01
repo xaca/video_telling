@@ -441,11 +441,20 @@
     }
     #cerrar_video_layer{
         position: absolute;
-        top:40px;
-        right: 40px;
+        top:0px;
+        right: 0px;
         font-size: 40px;
         font-family: sans-serif;
         font-weight: bolder;
         cursor: pointer;
         z-index: 2;
+        color:white;
+        width: 45px;
+        height: 45px;
+        background: black;
+        text-align: center;
+    }
+    #cerrar_video_layer:hover{
+        color:black;
+        background: white;
     }
