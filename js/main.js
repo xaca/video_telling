@@ -9,7 +9,7 @@ let btn_cerrar_video_layer, player_layer_wrap, layer_actual;
 let btn_ver_video_agape,btn_ver_video_siembra, btn_ver_video_sanedrin;
 let btn_ver_video_laberinto,btn_ver_video_oraculo,btn_ver_video_memoria;
 let btn_ver_video_alegria,btn_ver_video_alegria_layer,btn_ver_video_agora;
-let btn_ver_video_suenos,btn_comenzar_experiencia,btn_continuar;
+let btn_ver_video_suenos,btn_comenzar_experiencia,btns_continuar;
 let secciones = [];
 const videos = [];
 const videos_especiales = [];
@@ -124,7 +124,7 @@ function asignarReferencias()
     btn_ver_video_agora = document.getElementById("ver_video_agora");
     btn_ver_video_suenos = document.getElementById("ver_video_suenos");
     btn_comenzar_experiencia = document.getElementById("comenzar_experiencia");
-    //btn_continuar = document.getElementById("continuar");
+    btns_continuar = Array.from(document.querySelectorAll(".continuar"));
 }
 function agregarEventos()
 {
@@ -165,6 +165,11 @@ function agregarEventos()
     /* btn_continuar.addEventListener("click",()=>{
         console.dir(video_actual);
     }); */
+    btns_continuar.map((btn)=>{
+        btn.addEventListener("click",()=>{
+            console.log(video_actual.id);
+        });
+    });
 }
 function cargarLayer(id)
 {
