@@ -204,6 +204,7 @@ function agregarEventos()
 }
 function cargarInicio()
 {
+    document.getElementById("btn1").click();
     ocultarSeccion();
     cargarSeccion(1);
     animarSeccion(1);
