@@ -1,9 +1,8 @@
-let indice = 2;
 let fin_escena = false;
 let interval_id;
 let video_actual;
-let sound;
-let control_progreso, btns_progreso;
+let sound, id_sound;
+let control_progreso, btns_progreso, btn_ver_video_memoria_layer;
 let boton_ventana_pachamama, boton_cerrar_ventana,ventana_pachamama;
 let btn_cerrar_video_layer, player_layer_wrap, layer_actual;
 let btn_ver_video_agape,btn_ver_video_siembra, btn_ver_video_sanedrin;
@@ -51,7 +50,7 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 //    after the API code downloads.
 var player, player_layer;
 function onYouTubeIframeAPIReady() {
-    video_actual = videos[indice];
+    video_actual = videos[2];
     layer_actual = videos_especiales[0];
     player = new YT.Player('player', {
         height: '100%',
@@ -81,15 +80,19 @@ function onYouTubeIframeAPIReady() {
 
 window.onload = function()
 {
-    /*sound = new Howl({
+    sound = new Howl({
         src: ['sounds/JuneBug.mp3'],
         autoplay: false,
         loop: true,
         preload :true
-    });*/
+    });   
+    sound.on('fade',()=>{
+        sound.pause(id_sound); 
+    });
+    
     asignarReferencias();
     agregarEventos();
-    cargarSeccion(1);
+    cargarInicio();
 }
 
 
@@ -124,6 +127,7 @@ function asignarReferencias()
     btn_ver_video_agora = document.getElementById("ver_video_agora");
     btn_ver_video_suenos = document.getElementById("ver_video_suenos");
     btn_comenzar_experiencia = document.getElementById("comenzar_experiencia");
+    btn_ver_video_memoria_layer = document.getElementById("ver_video_memoria_layer");
     btns_continuar = Array.from(document.querySelectorAll(".continuar"));
     btns_progreso = Array.from(document.querySelectorAll(".boton_avance_circular"));
 }
@@ -167,9 +171,9 @@ function agregarEventos()
         //document.getElementById("btn2").click();
         btns_progreso[1].click();
     });
-    /* btn_continuar.addEventListener("click",()=>{
-        console.dir(video_actual);
-    }); */
+    btn_ver_video_memoria_layer.addEventListener("click",()=>{
+        cargarLayer(7);
+    });
     btns_continuar.map((btn)=>{
         btn.addEventListener("click",()=>{
             console.log(video_actual.id);
@@ -192,11 +196,20 @@ function agregarEventos()
                         btns_progreso[10].click();
                         break;
                 case 12: //document.getElementById("btn1").click();
-                        btns_progreso[0].click();
-                        animarSeccion(1);
+                        cargarInicio();
                         break;
             }
         });
+    });
+}
+function cargarInicio()
+{
+    ocultarSeccion();
+    cargarSeccion(1);
+    animarSeccion(1);
+    mostrarMensaje({
+        estado:"FIN_VIDEO",
+        imagen:"img/g1.jpg"
     });
 }
 function volverASeccion(id_seccion)
@@ -289,7 +302,7 @@ function cargarSeccion(id)
    ocultarSeccion();
    secciones[id].className = "contenedor";
    TweenLite.set(secciones[id], { clearProps: "all" });
-   TweenLite.to(secciones[id],.5,{opacity:1}); 
+   TweenLite.to(secciones[id],1,{opacity:1}); 
 }
 function seleccionarBoton(id)
 {
@@ -321,7 +334,7 @@ function mostarControlesUI(seccion)
     }
 }
 function cargarVideo(indice){
-    if(indice>0){
+    if(indice>1){
         ocultarMensaje();
         fin_escena = false;
         video_actual = videos[indice];            
@@ -330,20 +343,24 @@ function cargarVideo(indice){
     }
     else{
         detenerVideo();
-        //alert("fin de la experiencia :)");
+        pausarSonido();
+        if(indice==1)
+        {
+            cargarInicio();
+        }
     }
 }
 
 function onPlayerStateChange(event) {
     if (event.data == YT.PlayerState.PLAYING) {
-        //sound.play();
+       reproducirSonido();
     }
     if(event.data == YT.PlayerState.PAUSED)
     {
-        //sound.pause();
+        pausarSonido();
     }
     if(event.data == YT.PlayerState.ENDED){
-        //sound.pause();
+        pausarSonido();
         cargarFinVideo();   
     }
 }
@@ -375,12 +392,6 @@ function mostrarMensaje(obj)
         cargarImagen(obj.imagen);
     }
 }
-
-function cargarPlay(siguiente)
-{
-    let play = '<img src="img/Actions-go-next-view-icon.png" class="control" style="position: absolute;top: 40%;" onclick="cargarVideo('+siguiente+');" alt="">';
-    mensaje.innerHTML += play;
-}
 function cargarImagen(imagen)
 {
     mensaje.style.backgroundImage = 'url("'+imagen+'")';
@@ -396,4 +407,23 @@ function detenerVideo()
 function pausarVideo()
 {
     player.pauseVideo();
+}
+
+function reproducirSonido()
+{
+    if(!id_sound)
+    {
+        id_sound =  sound.play();
+    }
+    else{
+        sound.volume(1, id_sound);
+        sound.seek(0,id_sound).play();
+    }
+}
+function pausarSonido()
+{
+    if(id_sound)
+    {
+        sound.fade(1, 0, 500, id_sound);
+    }
 }
