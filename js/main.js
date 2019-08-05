@@ -3,7 +3,7 @@ let fin_escena = false;
 let interval_id;
 let video_actual;
 let sound;
-let control_progreso;
+let control_progreso, btns_progreso;
 let boton_ventana_pachamama, boton_cerrar_ventana,ventana_pachamama;
 let btn_cerrar_video_layer, player_layer_wrap, layer_actual;
 let btn_ver_video_agape,btn_ver_video_siembra, btn_ver_video_sanedrin;
@@ -15,22 +15,21 @@ const videos = [];
 const videos_especiales = [];
 /*
 c ->Id de la imagen de fondo que se carga al final del video
-s ->Siguiente video, o videos si la sección tienen más de un camino
+s ->Siguiente video
 v ->Id del video de youtube
-d ->Indica si hay un punto de decisión al final del video
+d ->Indica si hay un cambio en la navegación al final del video
 */
 videos[2] =  {c:"g2", id:2,v:"UJrPam0C5Vk",d:false,s:3};
 videos[3] =  {c:"g3", id:3,v:"J_USarY7szs",d:false,s:4};
 videos[4] =  {c:"g4", id:4,v:"TJ4hQjqDrOU",d:false,s:5};
 videos[5] =  {c:"g5", id:5,v:"7kOPn7uFfn8",d:false,s:6};
-videos[6] =  {c:"g6", id:6,v:"78eBaDqOCVc",d:true,s:[7,8,9]};
+videos[6] =  {c:"g6", id:6,v:"78eBaDqOCVc",d:false,s:7};
 videos[7] =  {c:"g7",id:7,v:"QFMglskQsDI",d:false,s:[]};
-videos[8] =  {c:"g8", id:8,v:"5zgk1mvyVN0",d:true,s:[9,10,8]};
-videos[9] =  {c:"g9",id:9,v:"qoI2zUSwRos",d:false,s:[]};
-videos[10] =  {c:"g10",id:10,v:"4iFtrOVXJjw",d:false,s:[]};
-videos[11] = {c:"g11", id:11,v:"UgUg0fT8Rvw",d:false,s:11};
-videos[12] = {c:"g12", id:12,v:"n1EuIINYmTk",d:false,s:12};
-//videos[12] = {c:"g9", id:12,v:"fUfDBsZTK1g",d:false,s:-1};//Indica el fin
+videos[8] =  {c:"g8", id:8,v:"5zgk1mvyVN0",d:true,s:7};
+videos[9] =  {c:"g9",id:9,v:"qoI2zUSwRos",d:true,s:7};
+videos[10] =  {c:"g10",id:10,v:"4iFtrOVXJjw",d:true,s:7};
+videos[11] = {c:"g11", id:11,v:"UgUg0fT8Rvw",d:false,s:12};
+videos[12] = {c:"g12", id:12,v:"n1EuIINYmTk",d:false,s:1};
 
 videos_especiales[0] = {v:"SNlk6mtJ9nE",name:"Agape"};
 videos_especiales[1] = {v:"Dna_LScGuZo",name:"Siembra"};
@@ -90,6 +89,7 @@ window.onload = function()
     });*/
     asignarReferencias();
     agregarEventos();
+    cargarSeccion(1);
 }
 
 
@@ -125,6 +125,7 @@ function asignarReferencias()
     btn_ver_video_suenos = document.getElementById("ver_video_suenos");
     btn_comenzar_experiencia = document.getElementById("comenzar_experiencia");
     btns_continuar = Array.from(document.querySelectorAll(".continuar"));
+    btns_progreso = Array.from(document.querySelectorAll(".boton_avance_circular"));
 }
 function agregarEventos()
 {
@@ -142,13 +143,16 @@ function agregarEventos()
         cargarLayer(3);
     });
     btn_ver_video_oraculo.addEventListener("click",()=>{
-        document.getElementById("btn8").click();
+        //document.getElementById("btn8").click();
+        btns_progreso[7].click();
     });
     btn_ver_video_memoria.addEventListener("click",()=>{
-        document.getElementById("btn9").click();
+        //document.getElementById("btn9").click();
+        btns_progreso[8].click();
     });
     btn_ver_video_alegria.addEventListener("click",()=>{
-        document.getElementById("btn10").click();
+        //document.getElementById("btn10").click();
+        btns_progreso[9].click();
     });
     btn_ver_video_alegria_layer.addEventListener("click",()=>{
         cargarLayer(4);
@@ -160,7 +164,8 @@ function agregarEventos()
         cargarLayer(6);
     });
     btn_comenzar_experiencia.addEventListener("click",()=>{
-        document.getElementById("btn2").click();
+        //document.getElementById("btn2").click();
+        btns_progreso[1].click();
     });
     /* btn_continuar.addEventListener("click",()=>{
         console.dir(video_actual);
@@ -175,19 +180,45 @@ function agregarEventos()
                 case 4:
                 case 5:
                 case 6:
-                case 11: document.getElementById("btn"+(video_actual.id+1)).click();
+                case 11: //document.getElementById("btn"+(video_actual.id+1)).click();
+                         btns_progreso[video_actual.id].click();
                          break;
                 case 8:
                 case 9: 
-                case 10: document.getElementById("btn7").click(); 
+                case 10: //btns_progreso[6].click(); 
+                         volverASeccion(7);
                          break;
-                case 7: document.getElementById("btn11").click();
+                case 7: //document.getElementById("btn11").click();
+                        btns_progreso[10].click();
                         break;
-                case 12: document.getElementById("btn1").click();
+                case 12: //document.getElementById("btn1").click();
+                        btns_progreso[0].click();
+                        animarSeccion(1);
                         break;
             }
         });
     });
+}
+function volverASeccion(id_seccion)
+{
+    ocultarSeccion();                                                
+    quitarSeleccion();
+    seleccionarBoton("btn"+id_seccion);
+    cargarSeccion(id_seccion);
+    control_progreso.className = "sprite progreso_"+id_seccion;
+    video_actual = videos[id_seccion];
+    animarSeccion(id_seccion);                     
+    mostrarMensaje({
+        estado:"FIN_VIDEO",
+        imagen:"img/"+video_actual.c+".jpg"
+    });
+}
+function animarSeccion(id_seccion)
+{
+    ocultarControlesUI(id_seccion);  
+    setTimeout(()=>{
+        mostarControlesUI(id_seccion);
+    },800); 
 }
 function cargarLayer(id)
 {
@@ -223,26 +254,6 @@ function onPlayerReady(event) {
     detenerVideo();
 }
 
-function izquierda(){
-    cargarVideo(video_actual.s[0]);
-    ocultarMensaje();
-}
-
-function centro(){
-    cargarVideo(video_actual.s[1]);
-    ocultarMensaje();
-}
-
-function derecha(){
-    cargarVideo(video_actual.s[2]);
-    ocultarMensaje();
-}
-
-function arriba(){
-    cargarVideo(video_actual.s[1]);
-    ocultarMensaje();
-}
-
 function obtenerId(value)
 {
     return  value.split("btn")[1];
@@ -250,10 +261,10 @@ function obtenerId(value)
 
 function quitarSeleccion()
 {
-    let botones = document.getElementsByClassName("boton_avance_circular");
-    let cont = 1;
-    for (const key in botones) {
-        botones[key].className = "boton_avance_circular btn"+cont++;
+    //let botones = document.getElementsByClassName("boton_avance_circular");
+    let cont = 1; 
+    for (const key in btns_progreso) {
+        btns_progreso[key].className = "boton_avance_circular btn"+cont++;
     }
 }
 function actualizarProgreso(indice, target)
@@ -276,11 +287,15 @@ function ocultarSeccion()
 function cargarSeccion(id)
 {
    ocultarSeccion();
-   secciones[id].className = "contenedor"; 
+   secciones[id].className = "contenedor";
+   TweenLite.set(secciones[id], { clearProps: "all" });
+   TweenLite.to(secciones[id],.5,{opacity:1}); 
 }
 function seleccionarBoton(id)
 {
-    document.getElementById(id).className = "boton_avance_circular seleccionado "+id;
+    //document.getElementById(id).className = "boton_avance_circular seleccionado "+id;
+    let indice = obtenerId(id);
+    btns_progreso[indice-1].className = "boton_avance_circular seleccionado "+id;
 }
 function calcularSelectorSeccion(seccion)
 {
@@ -315,7 +330,7 @@ function cargarVideo(indice){
     }
     else{
         detenerVideo();
-        alert("fin de la experiencia :)");
+        //alert("fin de la experiencia :)");
     }
 }
 
@@ -329,12 +344,17 @@ function onPlayerStateChange(event) {
     }
     if(event.data == YT.PlayerState.ENDED){
         //sound.pause();
-        mostarControlesUI(video_actual.id);
-        mostrarMensaje({
-             estado:"FIN_VIDEO",
-             imagen:"img/"+video_actual.c+".jpg"
-         });         
+        cargarFinVideo();   
     }
+}
+
+function cargarFinVideo()
+{    
+    mostarControlesUI(video_actual.id);
+    mostrarMensaje({
+        estado:"FIN_VIDEO",
+        imagen:"img/"+video_actual.c+".jpg"
+    });      
 }
 
 function ocultarMensaje()
@@ -347,13 +367,7 @@ function mostrarMensaje(obj)
     mensaje.className = "show";
     detenerVideo();
     mensaje.innerHTML = "";
-    console.dir(obj);
-
-    if(obj.estado == "CONDICIONAL")
-    {
-        cargarControles(obj.controles);
-        cargarImagen(obj.imagen);
-    }
+    console.dir(obj);   
 
     if(obj.estado == "FIN_VIDEO")
     {
@@ -373,40 +387,6 @@ function cargarImagen(imagen)
     mensaje.style.backgroundSize = "cover";
     mensaje.style.opacity = 0;
     TweenLite.to(mensaje,.5,{opacity:1});
-}
-
-function cargarControles(controles)
-{
-    let ii = '<img src="img/Actions-go-previous-icon.png" class="control" onclick="izquierda();" alt="">';
-    let iv = '<img src="img/Eye-icon.png" class="control" onclick="centro();" alt="">';   
-    let id = '<img src="img/Actions-go-next-icon.png" class="control" onclick="derecha();" alt="">';
-    let ia = '<img src="img/Actions-go-up-icon.png" class="control" onclick="arriba();" alt="">';
-    let temp = controles.split(",");
-    let salida = "";
-    
-    for(let cont = 0; cont<temp.length;cont++)
-    {
-        if(temp[cont]=="i")
-        {
-            salida+= ii;
-        }
-
-        if(temp[cont]=="d")
-        {
-            salida+= id;
-        }
-
-        if(temp[cont]=="v")
-        {
-            salida+= iv;
-        }
-        if(temp[cont]=="a")
-        {
-            salida+= ia;
-        } 
-    }
-    
-    mensaje.innerHTML += salida;
 }
 
 function detenerVideo() 
