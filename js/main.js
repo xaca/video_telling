@@ -168,6 +168,24 @@ function agregarEventos()
     btns_continuar.map((btn)=>{
         btn.addEventListener("click",()=>{
             console.log(video_actual.id);
+            switch(video_actual.id)
+            {
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 11: document.getElementById("btn"+(video_actual.id+1)).click();
+                         break;
+                case 8:
+                case 9: 
+                case 10: document.getElementById("btn7").click(); 
+                         break;
+                case 7: document.getElementById("btn11").click();
+                        break;
+                case 12: document.getElementById("btn1").click();
+                        break;
+            }
         });
     });
 }
