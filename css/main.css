@@ -102,6 +102,12 @@
         background-image: url(../img/ventana_pachamama.png);
         background-repeat: no-repeat;
     }
+    .cambio_cont_pachamama{
+        position: relative;
+        top:5px;
+        overflow-y: scroll;
+        height: 200px;
+    }
     #imagen_pachamama{
         position: absolute;
         width: 300px;
