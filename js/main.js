@@ -244,7 +244,7 @@ function asignarVideoLayer(data){
 }
 function abrirVentana()
 {
-    TweenLite.to(ventana_pachamama,.5,{top:108,opacity:1});
+    TweenLite.to(ventana_pachamama,.5,{top:18,opacity:1});
 }
 function cerrarLayerVideo()
 {  

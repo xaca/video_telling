@@ -104,9 +104,9 @@
     }
     .cambio_cont_pachamama{
         position: relative;
-        top:5px;
-        overflow-y: scroll;
-        height: 200px;
+        top: 7px;
+        overflow: hidden;
+        height: 450px;
     }
     #imagen_pachamama{
         position: absolute;
@@ -114,7 +114,7 @@
         top: 98px;
         left: 98px;
     }
-    #ventana_pachamama h1{
+    #ventana_pachamama h2{
         position: absolute;
         font-family: 'Montserrat', sans-serif;
         top: 48px;
@@ -136,6 +136,7 @@
         top: 59px;
         right: 60px;
         cursor: pointer;
+        z-index: 20;
     }
     .boton{
         cursor: pointer;
